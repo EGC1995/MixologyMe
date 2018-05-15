@@ -1,0 +1,44 @@
+<!Doctype HTML>
+<html>
+  <head>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel = "stylesheet" href = "https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel = "stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css">
+    <script type = "text/javascript" src = "https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src = "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
+  </head>
+
+
+    <script>
+    function goBack() {
+        window.history.back();
+    }
+    </script>
+
+
+
+  <body>
+    <div class="card-panel black-text red" align="center"><h1>Ingredients</h1></div>
+    <div class="container">
+
+      <h2>{{nameofdrink}}</h2>
+      <ol>
+      {% for i in range(ingredients|length) %}
+        {% if ingredients[i] != '' and ingredients[i] != none%}
+          <li>
+              {{ingredients[i]}}
+              {%if measurements[i] != '\n' and measurements[i] != ' ' and measurements[i] != '' and measurements[i] != none%} 
+                - {{measurements[i]}} 
+              {% endif %}
+          </li>
+        {% endif %}
+      {% endfor %}
+      </ol>
+      <p>{{instructions}}</p>
+
+      <button class= "waves-effect waves-light btn-large red black-text" onclick="goBack()"> Return </button>
+    </div>
+  </body>
+
+</html>

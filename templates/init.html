@@ -1,0 +1,126 @@
+<!Doctype HTML>
+<html>
+  <head>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel = "stylesheet" href = "https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel = "stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css">
+    <link rel = "stylesheet" href = {{ url_for('static',filename='init.css') }}>
+    <script type = "text/javascript" src = "https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src = "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
+  </head>
+
+
+  <script>
+    $(document).ready(function() {
+      $('select').material_select();
+    });
+   </script>
+
+<!-- super jank ass way of stretching the button -->
+   <style>
+    .stretched{
+      width: 100%;
+    }
+    .test{
+      width: 25%;
+    }
+   </style>
+
+  <body>
+    <!-- <nav> -->
+      <!-- <div class="nav-wrapper light-green accent-3"> -->
+        <div class="title valign-wrapper"><h1 class="col s12">MixologyMe</h1></div>
+        <!-- <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <li><a href="">Sass</a></li>
+          <li><a href="">Components</a></li>
+          <li><a href="">JavaScript</a></li>
+        </ul>
+      </div>
+    </nav> -->
+  <div class="row" style="margin:0">
+    <div class="container col s12 m8">
+      <div class="col s12">
+        <h4>What do you have?</h4>
+      </div>
+      <form class="col s12" method='POST'>
+        <div class="input-field col s12 test">
+          <select name="firstdrink">
+            <option value=" "> </option>
+            <option value="Vodka">Vodka</option>
+            <option value="Gin">Gin</option>
+            <option value="Campari">Campari</option>
+            <option value="Vermouth">Vermouth</option>
+            <option value="Whiskey">Whiskey</option>
+            <option value="Scotch">Scotch</option>
+            <option value="Bourbon">Bourbon</option>
+            <option value="Rum">Rum</option>
+            <option value="Brandy">Brandy</option>
+          </select>
+        </div>
+        <div class="input-field col s12 test">
+          <select name="mixer">
+              <option value=" "> </option>
+              <option value="Pineapple Juice">Pineapple Juice</option>
+              <option value="Lime Juice">Lime Juice</option>
+              <option value="Lemonade">Lemonade</option>
+              <option value="Hot Chocolate">Hot Chocolate</option>
+              <option value="Tonic Water">Tonic Water</option>
+              <option value="Ginger Ale">Ginger ale</option>
+              <option value="Orange Juice">Orange Juice</option>
+              <option value="Coffee">Coffee</option>
+              <option value="Grenadine">Grenadine</option>
+              <option value="Soda Water">Soda Water</option>
+          </select>
+        </div>
+        <button class= "waves-effect waves-light btn-large col s12 red black-text"  type="submit"><font size="2">Let's Get Mixing</font></button>
+      </form>
+
+      <div class="col s12">
+        <h4>
+          When life gives you lemons, it can be hard to
+          know just how to use them. Simply select what
+          alcohol and mixers you have, and we'll help you
+          find all the cocktails you can make. Impress
+          your friends by knowing exactly what you need to
+          make classy sips and timeless toasts.
+        </h4>
+      </div>
+    </div>
+
+
+    <div id="list" class="col s12 m4 results">
+      <script type ="text/javascript">
+        var drinkNames = {{names|safe}};
+        var imageSources = {{value|safe}};
+        var numElements = {{length}};
+        var strValue = "";
+        document.write("<table>");
+        while(numElements >= 0){
+          strValue = drinkNames[numElements]
+          strValue = strValue.replace(/\s+/g, '****');
+          document.write("\
+            <tr> \
+              <td> \
+                <font size=\"5\">" + drinkNames[numElements] + "</font> \
+              </td> \
+              <td> \
+                <img src=" + imageSources[numElements] + " width=100px> \
+              </td> \
+              <td> \
+                <form action =\"/getIngredient\" method='POST'> \
+                  <button type=\"submit\" name=\"cocktail\" value="+ strValue +">Ingredient</button> \
+                </form> \
+              </td> \
+            </tr>"
+          );
+          numElements = numElements -1;
+        }
+        document.write("</table>");
+      </script>
+    </div>
+
+  </div>
+</body>
+
+</html>
